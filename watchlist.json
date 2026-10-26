@@ -1,0 +1,57 @@
+{
+  "timezone": "America/Buenos_Aires",
+  "min_views": 10000,
+  "star_views": 25000,
+  "lang": "en",
+  "output_languages": ["en", "es"],
+  "accounts": [
+    {"handle": "MetaDAOProject", "notes": "Official MetaDAO account"},
+    {"handle": "backabledotbiz", "notes": "MetaDAO fundraising platform"},
+    {"handle": "mitchellsniffle", "notes": "MetaDAO investing and founder content"},
+    {"handle": "metaproph3t", "notes": "MetaDAO founder and ecosystem updates"},
+    {"handle": "mrinko", "notes": "MetaDAO team and product explanations"},
+    {"handle": "ripcarsio", "notes": "MetaDAO-launched company; 66K-view observed MetaDAO post"},
+    {"handle": "Delphi_Digital", "notes": "31K-view observed MetaDAO analysis"},
+    {"handle": "0xSrMessi", "notes": "Operator; 22.6K-view observed MetaDAO/Percolator post"},
+    {"handle": "TheiaResearch", "notes": "Liquid crypto and MetaDAO commentary"},
+    {"handle": "lbolord", "notes": "MetaDAO launch and capital-markets commentary"},
+    {"handle": "connorking", "notes": "Ownership-coin market analysis"},
+    {"handle": "supercontraa", "notes": "MetaDAO ownership-coin market commentary"},
+    {"handle": "neuralunlock", "notes": "Surfaced in high-engagement MetaDAO search"},
+    {"handle": "mango_", "notes": "Surfaced in high-engagement MetaDAO search"},
+    {"handle": "allocateur", "notes": "Surfaced in high-engagement MetaDAO search"},
+    {"handle": "crediblefin", "notes": "MetaDAO ownership company"},
+    {"handle": "futarddotio", "notes": "MetaDAO ecosystem and futarchy"},
+    {"handle": "JurassicFi", "notes": "MetaDAO ownership company"},
+    {"handle": "ownershipfm", "notes": "MetaDAO and ownership-media account"},
+    {"handle": "MetaNIOL", "notes": "Spanish-language MetaDAO ecosystem coverage"},
+    {"handle": "joinsendr", "notes": "Backable raise participant"}
+  ],
+  "trend_input_only": ["QwQiao", "toly"],
+  "keyword_domain_terms": [
+    "metadao", "futarchy", "decision markets", "ownership coins", "backable",
+    "internet capital markets", "liquid venture", "conditional markets", "solana"
+  ],
+  "x_keywords": {
+    "max": 16,
+    "core": [
+      "MetaDAO", "futarchy", "decision markets", "ownership coins",
+      "Backable", "internet capital markets", "liquid venture", "conditional markets",
+      "fundraising", "tokenized equity", "DAO treasury", "Solana",
+      "venture capital", "governance", "prediction markets", "capital formation"
+    ]
+  },
+  "experiment": {
+    "enabled": false,
+    "handle": "0xSrMessi",
+    "user_id": "",
+    "start": "2026-10-27",
+    "end": "2026-11-10",
+    "baseline_days": 30,
+    "trend_threshold": 35,
+    "min_n": 5,
+    "min_age_h": 24,
+    "hypothesis": "Trend-matched bilingual MetaDAO posts beat non-trend posts of the same format"
+  },
+  "board_url": "https://srmessisol.github.io/x-virality-board/"
+}
