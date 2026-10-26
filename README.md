@@ -17,6 +17,8 @@ The initial account set comes from a signed-in X search performed on 2026-10-26.
 
 Publish `index.html` and `data.json` from the root of a public GitHub repository with GitHub Pages enabled. Keep `watchlist.json` available to the daily collector but do not place browser sessions, cookies, or API secrets in the repository.
 
+Live dashboard: https://srmessisol.github.io/metadao-signal-desk/
+
 ## Bilingual drafting rule
 
 For every selected source post, produce:
