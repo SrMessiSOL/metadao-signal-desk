@@ -630,8 +630,8 @@ footer{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);color:v
           <div class="yd-label" id="your-day-label">Your day · @0xSrMessi</div>
           <div class="yd-meta" id="your-day-meta">loading…</div>
           <div class="target-list" style="padding-top:0;margin-top:0;gap:16px">
-            <div><div class="target-row-head"><span>Best post vs 5k</span><b id="you-5k-copy">—</b></div><div class="target-track"><div class="target-fill" id="you-5k-progress"></div></div></div>
-            <div><div class="target-row-head"><span>Best post vs 10k ★</span><b id="you-10k-copy">—</b></div><div class="target-track"><div class="target-fill" id="you-10k-progress"></div></div></div>
+            <div><div class="target-row-head"><span>Best post vs 10k</span><b id="you-5k-copy">—</b></div><div class="target-track"><div class="target-fill" id="you-5k-progress"></div></div></div>
+            <div><div class="target-row-head"><span>Best post vs 25k ★</span><b id="you-10k-copy">—</b></div><div class="target-track"><div class="target-fill" id="you-10k-progress"></div></div></div>
           </div>
         </div>
       </article>
@@ -660,7 +660,7 @@ footer{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);color:v
       </section>
     </div>
 
-    <div class="section-head reveal"><div><div class="section-index">05 / leaderboards</div><h2>Week · Month</h2></div><div class="section-note" id="lb-note">best / total (≥5k hits)</div></div>
+    <div class="section-head reveal"><div><div class="section-index">05 / leaderboards</div><h2>Week · Month</h2></div><div class="section-note" id="lb-note">best / total (≥10k hits)</div></div>
     <section class="boards" aria-label="Week and month leaderboards">
       <article class="panel board-panel reveal"><div class="panel-label"><strong>W /</strong> rolling week</div><h3 id="week-title">Week</h3><div id="week-board"></div></article>
       <article class="panel board-panel reveal"><div class="panel-label"><strong>M /</strong> calendar month</div><h3 id="month-title">Month</h3><div id="month-board"></div></article>
@@ -684,8 +684,8 @@ footer{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);color:v
     <div class="section-head reveal" id="exp-head" hidden><div><div class="section-index">08c / experiment</div><h2>Experiment: trend vs non-trend</h2></div><div class="section-note" id="exp-note">your posts · same-format comparison</div></div>
     <section class="exp" id="exp" hidden></section>
 
-    <div class="section-head reveal"><div><div class="section-index">09 / below floor</div><h2>No hits ≥5k</h2></div><div class="section-note">handles + likely reasons</div></div>
-    <section class="nohits-block" id="nohits" aria-label="Accounts without 5k hits"></section>
+    <div class="section-head reveal"><div><div class="section-index">09 / below floor</div><h2>No hits ≥10k</h2></div><div class="section-note">handles + likely reasons</div></div>
+    <section class="nohits-block" id="nohits" aria-label="Accounts without 10k hits"></section>
   </main>
 
   <footer class="reveal">
@@ -922,8 +922,8 @@ function renderYourDay(youRank, handle){
   const p10=Math.min(100, pct(v, DASHBOARD_TARGETS.starViews));
   const c5=document.getElementById('you-5k-copy');
   const c10=document.getElementById('you-10k-copy');
-  if(c5) c5.textContent = bv==null ? '—' : `${fmt(v)} / 5K · ${p5}% · ${youRank.vs_5k==='done'?'DONE':'PENDING'}`;
-  if(c10) c10.textContent = bv==null ? '—' : `${fmt(v)} / 10K · ${p10}% · ${youRank.vs_10k==='done'?'DONE':'PENDING'}`;
+  if(c5) c5.textContent = bv==null ? '—' : `${fmt(v)} / ${fmt(DASHBOARD_TARGETS.minHitViews)} · ${p5}% · ${youRank.vs_5k==='done'?'DONE':'PENDING'}`;
+  if(c10) c10.textContent = bv==null ? '—' : `${fmt(v)} / ${fmt(DASHBOARD_TARGETS.starViews)} · ${p10}% · ${youRank.vs_10k==='done'?'DONE':'PENDING'}`;
   requestAnimationFrame(()=>{
     const a=document.getElementById('you-5k-progress');
     const b=document.getElementById('you-10k-progress');
@@ -934,24 +934,24 @@ function renderYourDay(youRank, handle){
 function normalizeNoHits(raw){
   if(!Array.isArray(raw)) return [];
   return raw.map(item=>{
-    if(typeof item==='string') return {handle:item.startsWith('@')?item:'@'+item, reason:'Below 5k views floor or no qualifying day original.', max_views:null};
+    if(typeof item==='string') return {handle:item.startsWith('@')?item:'@'+item, reason:'Below 10k views floor or no qualifying day original.', max_views:null};
     const handle=item.handle||item.account||'';
     return {
       handle: handle.startsWith('@')?handle:'@'+handle,
-      reason: item.reason||item.note||item.likely_reason||'Below 5k views floor or no qualifying day original.',
+      reason: item.reason||item.note||item.likely_reason||'Below 10k views floor or no qualifying day original.',
       max_views: item.max_views!=null?item.max_views:null
     };
   });
 }
 function renderNoHits(list){
   const el=document.getElementById('nohits');
-  if(!list.length){el.innerHTML='<p class="muted">All watchlist accounts cleared the 5k floor today.</p>';return}
+  if(!list.length){el.innerHTML='<p class="muted">No below-floor results yet. The first scrape will evaluate every account against the 10k floor.</p>';return}
   const sorted=[...list].sort((a,b)=>{
     const av=a.max_views==null?-1:num(a.max_views);
     const bv=b.max_views==null?-1:num(b.max_views);
     return bv-av;
   });
-  el.innerHTML=sorted.map(n=>`<article class="nohit"><div><div class="nohit-handle">${esc(n.handle)}</div><div class="nohit-badge">no hit ≥5k</div></div><div class="nohit-reason">${esc(n.reason)}</div><div class="nohit-max">max seen<b>${n.max_views==null?'—':esc(fmt(n.max_views))}</b></div></article>`).join('');
+  el.innerHTML=sorted.map(n=>`<article class="nohit"><div><div class="nohit-handle">${esc(n.handle)}</div><div class="nohit-badge">no hit ≥10k</div></div><div class="nohit-reason">${esc(n.reason)}</div><div class="nohit-max">max seen<b>${n.max_views==null?'—':esc(fmt(n.max_views))}</b></div></article>`).join('');
 }
 function staggerCards(rootSel){
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
